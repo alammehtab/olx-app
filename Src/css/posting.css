@@ -1,0 +1,45 @@
+.submit-ads {
+  width: 50%;
+  padding-left: 0;
+  padding-right: 0;
+  margin-bottom: 30px; }
+
+#images {
+  padding: 10px;
+  border-radius: 5px; }
+
+.img-container {
+  position: relative;
+  height: 80px;
+  line-height: 80px;
+  border: 1px solid #cfcece;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  background-repeat: no-repeat;
+  background-size: cover; }
+
+section {
+  width: 100%;
+  padding: 0;
+  margin-bottom: 20px; }
+
+#AdSubmitsuccessDialog {
+  display: none; }
+
+@media screen and (max-width: 575px) {
+  #images .col-md-4 {
+    display: inline-block;
+    flex: 1 0 50%; } }
+
+@media screen and (max-width: 750px) {
+  .submit-ads {
+    width: 85%; } }
+
+@media screen and (min-width: 751px) and (max-width: 1000px) {
+  .submit-ads {
+    width: 75%; } }
+
+@media screen and (max-width: 1400px) and (min-width: 1000px) {
+  .submit-ads {
+    width: 60%; } }

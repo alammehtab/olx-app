@@ -1,0 +1,111 @@
+#offerMainContainer {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+  #offerMainContainer .col-md-8 {
+    padding-right: 5px; }
+  #offerMainContainer .offer-heading {
+    padding: 5px 10px; }
+    #offerMainContainer .offer-heading p {
+      padding: 5px 10px 5px 10px; }
+    #offerMainContainer .offer-heading span {
+      margin-left: 10px; }
+    #offerMainContainer .offer-heading .date {
+      border-left: 1px solid #dbdbdb; }
+  #offerMainContainer .offer-description {
+    padding: 0px; }
+    #offerMainContainer .offer-description .big-image {
+      position: relative;
+      background-repeat: no-repeat;
+      background-size: contain;
+      border-top: 1px solid #cecece;
+      border-bottom: 1px solid #cecece;
+      padding-top: 10px;
+      padding-bottom: 10px; }
+      #offerMainContainer .offer-description .big-image .btn-left, #offerMainContainer .offer-description .big-image .btn-right, #offerMainContainer .offer-description .big-image .btn-fullimg {
+        position: absolute;
+        font-size: 50px;
+        cursor: pointer; }
+      #offerMainContainer .offer-description .big-image .btn-left {
+        top: 150px;
+        left: 10px; }
+      #offerMainContainer .offer-description .big-image .btn-right {
+        right: 10px;
+        top: 150px; }
+      #offerMainContainer .offer-description .big-image .btn-fullimg {
+        bottom: 10px;
+        right: 10px; }
+      #offerMainContainer .offer-description .big-image .img {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        height: 100%;
+        padding: 0px; }
+        #offerMainContainer .offer-description .big-image .img img {
+          width: 100%;
+          height: 100%;
+          margin: 0px; }
+    #offerMainContainer .offer-description .photos-bar {
+      padding: 0;
+      margin-top: 10px; }
+      #offerMainContainer .offer-description .photos-bar ul {
+        padding: 0; }
+        #offerMainContainer .offer-description .photos-bar ul li {
+          display: inline-block;
+          width: 50px;
+          height: 60px;
+          margin: 10px 5px 5px 5px;
+          padding: 0;
+          cursor: zoom-in;
+          opacity: 0.5; }
+          #offerMainContainer .offer-description .photos-bar ul li img {
+            width: 100%;
+            height: 100%;
+            margin: 0px; }
+        #offerMainContainer .offer-description .photos-bar ul .active {
+          opacity: 1; }
+        #offerMainContainer .offer-description .photos-bar ul li:hover {
+          opacity: 1; }
+    #offerMainContainer .offer-description .details ul {
+      padding: 0; }
+      #offerMainContainer .offer-description .details ul li {
+        display: inline-block;
+        margin: 10px 5px 5px 5px;
+        padding: 0; }
+    #offerMainContainer .offer-description .details .secodary {
+      padding: 8px; }
+  #offerMainContainer .offer-action div {
+    margin-bottom: 15px; }
+  #offerMainContainer .offer-action .content-box {
+    padding: 8px;
+    background-color: rgba(89, 178, 238, 0.247);
+    border-radius: 3px;
+    margin-left: 8px;
+    margin-right: 8px; }
+  #offerMainContainer .offer-action .price-tag {
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 0 5px 5px 0;
+    z-index: 2;
+    background: #97df59;
+    color: white;
+    font-size: 24px;
+    padding: 13px 5px;
+    width: 250px;
+    padding: 8px;
+    height: 60px;
+    line-height: 42px;
+    border-radius: 12px 45px; }
+  #offerMainContainer .offer-action .safety-box li {
+    list-style-type: decimal !important; }
+
+@media screen and (min-width: 600px) {
+  .big-image {
+    height: 432px; } }
+
+@media (min-width: 200px) and (max-width: 600px) {
+  .big-image {
+    height: 200px; }
+    .big-image .img {
+      width: 80% !important; }
+  .btn-right, .btn-left, .btn-fullimg {
+    display: none; } }

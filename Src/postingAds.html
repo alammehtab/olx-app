@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Submit an ad</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+      integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/commonStyle.css" />
+    <link rel="stylesheet" href="css/authenticationStyle.css" />
+    <link rel="stylesheet" href="css/iziToast.min.css">
+    <link rel="stylesheet" href="css/tooltip.css" />
+    <link rel="stylesheet" href="css/custom controls.css" />
+    <link rel="stylesheet" href="css/model.css" />
+    <link rel="stylesheet" href="css/posting.css" />
+  </head>
+
+  <body>
+    <!-- header -->
+    <section class="container header">
+      <nav class="navbar navbar-expand-md navbar-dark">
+        <a class="logo" href="./index.html"
+          ><img src="../Assets/Images/Olx logo.svg" alt="logo"
+        /></a>
+        <span class="text-bold heading heading-large text-large"
+          >Pakistan's Largest Marketplace</span
+        >
+        <span
+          class="text-bold heading heading-small text-large"
+          style="display:none"
+          >OLX PK</span
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#downDownMyAccount"
+          aria-controls="#downDownMyAccount"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          style="z-index:1;"
+        >
+          <span class="fas fa-bars text-large text-orange"></span>
+        </button>
+        <div class="drop-down">
+          <a href="answers.html" class="btn btn-account" id="myAccount">
+            <i class="fas fa-user "></i> My Account</a
+          >
+
+          <!-- drop down my account -->
+          <div class="collapse" id="downDownMyAccount">
+            <ul class="nav navbar-nav mr-auto">
+              <li class="hover-back-orange">
+                <a href="answers.html" class="text-bold text-blue">
+                  My Account</a
+                >
+              </li>
+              <li class="hover-back-orange">
+                <a href="postingAds.html" class="text-bold text-blue"
+                  >Submit an Ad</a
+                >
+              </li>
+              <li class="back-light-gray btn-logout">
+                <a
+                  href="#"
+                  class="text-bold text-dark-grey"
+                  onclick="Logout()"
+                  id="btnLogout"
+                  >Logout</a
+                >
+              </li>
+            </ul>
+          </div>
+          <!-- end of drop down -->
+        </div>
+        <a href="postingAds.html" class="btn btn-submit-ad">Submit an Ad</a>
+      </nav>
+    </section>
+    <!-- end of header -->
+
+    <!-- main content -->
+    <div class="container border-panel submit-ads" id="submitAdForm">
+      <section class="border-bottom-light-grey">
+        <p>&nbsp;&nbsp;Submit an Ad</p>
+      </section>
+
+      <form id="adForm">
+        <section class="border-bottom-light-grey">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-controls">
+                <input
+                  type="text"
+                  name="title"
+                  class="text-box form-element not-validated"
+                  placeholder="Title..."
+                  id="title"
+                  onblur="filterInput(this)"
+                />
+                <span class="form-validate validate-img text-red">
+                  <img src="./Assets/Images/Warning.png" alt="alert" />
+                </span>
+                <p class="form-validate validate-text text-red">
+                  Please enter title of ad
+                </p>
+              </div>
+              <div class="form-controls">
+                <select
+                  class="form-control form-control-sm combo-box form-element not-validated"
+                  id="Adcategory"
+                  name="category"
+                  onblur="filterInput(this)"
+                >
+                  <option selected="selected">Select a Category</option>
+                  <option>Property for Sale</option>
+                  <option>Property for Rent</option>
+                  <option>Vehicles</option>
+                  <option>Bikes</option>
+                  <option>Electronics & Home Appliances</option>
+                  <option>Mobiles</option>
+                  <option>Jobs</option>
+                  <option>Bussiness, Industrial & Agriculture</option>
+                  <option>Furniture & Home Decor</option>
+                  <option>Animals</option>
+                  <option>Books, Sports & Hobbies</option>
+                  <option>Fashion & Beauty</option>
+                  <option>Kids</option>
+                </select>
+                <span class="form-validate validate-img text-red">
+                  <img src="./Assets/Images/Warning.png" alt="alert" />
+                </span>
+                <p class="form-validate validate-text text-red">
+                  Please select category
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="border-bottom-light-grey">
+          <div id="categoryChilds"></div>
+          <div id="images" class="form-controls tool-tip">
+            <h5 class="heading text-bold text-blue">Images</h5>
+            <div class="row">
+              <div
+                class="col-md-4 col-sm-4 text-bold text-medium text-center text-blue"
+              >
+                <div class="img-container">
+                  <a
+                    href="javascript:void(0)"
+                    onclick="uploadImg(this)"
+                    class="btn-uploadimg"
+                    ><i class="fas fa-plus"></i></a
+                  ><input
+                    type="file"
+                    style="display:none"
+                    onchange="readImgUrl(this);"
+                    accept="image/gif , image/png, image/jpg, image/jpeg"
+                  />
+                </div>
+              </div>
+              <div
+                class="col-md-4 col-sm-4 text-bold text-medium text-center text-blue"
+              >
+                <div class="img-container">
+                  <a
+                    href="javascript:void(0)"
+                    onclick="uploadImg(this)"
+                    class="btn-uploadimg"
+                    ><i class="fas fa-plus"></i></a
+                  ><input
+                    type="file"
+                    style="display:none"
+                    onchange="readImgUrl(this);"
+                    accept="image/gif , image/png, image/jpg, image/jpeg"
+                  />
+                </div>
+              </div>
+              <div
+                class="col-md-4 col-sm-4 text-bold text-medium text-center text-blue"
+              >
+                <div class="img-container">
+                  <a
+                    href="javascript:void(0)"
+                    onclick="uploadImg(this)"
+                    class="btn-uploadimg"
+                    ><i class="fas fa-plus"></i></a
+                  ><input
+                    type="file"
+                    style="display:none"
+                    onchange="readImgUrl(this);"
+                    accept="image/gif , image/png, image/jpg, image/jpeg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div
+                class="col-md-4 col-sm-4 text-bold text-medium text-center text-blue"
+              >
+                <div class="img-container">
+                  <a
+                    href="javascript:void(0)"
+                    onclick="uploadImg(this)"
+                    class="btn-uploadimg"
+                    ><i class="fas fa-plus"></i></a
+                  ><input
+                    type="file"
+                    style="display:none"
+                    onchange="readImgUrl(this);"
+                    accept="image/gif , image/png, image/jpg, image/jpeg"
+                  />
+                </div>
+              </div>
+              <div
+                class="col-md-4 col-sm-4 text-bold text-medium text-center text-blue"
+              >
+                <div class="img-container">
+                  <a
+                    href="javascript:void(0)"
+                    onclick="uploadImg(this)"
+                    class="btn-uploadimg"
+                    ><i class="fas fa-plus"></i></a
+                  ><input
+                    type="file"
+                    style="display:none"
+                    onchange="readImgUrl(this);"
+                    accept="image/gif , image/png, image/jpg, image/jpeg"
+                  />
+                </div>
+              </div>
+              <div
+                class="col-md-4 col-sm-4 text-bold text-medium text-center text-blue"
+              >
+                <div class="img-container">
+                  <a
+                    href="javascript:void(0)"
+                    onclick="uploadImg(this)"
+                    class="btn-uploadimg"
+                    ><i class="fas fa-plus"></i></a
+                  ><input
+                    type="file"
+                    style="display:none"
+                    onchange="readImgUrl(this);"
+                    accept="image/gif , image/png, image/jpg, image/jpeg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div
+                class="col-md-4 col-sm-4 text-bold text-medium text-center text-blue"
+              >
+                <div class="img-container">
+                  <a
+                    href="javascript:void(0)"
+                    onclick="uploadImg(this)"
+                    class="btn-uploadimg"
+                    ><i class="fas fa-plus"></i></a
+                  ><input
+                    type="file"
+                    style="display:none"
+                    onchange="readImgUrl(this);"
+                    accept="image/gif , image/png, image/jpg, image/jpeg"
+                  />
+                </div>
+              </div>
+              <div
+                class="col-md-4 col-sm-4 text-bold text-medium text-center text-blue"
+              >
+                <div class="img-container">
+                  <a
+                    href="javascript:void(0)"
+                    onclick="uploadImg(this)"
+                    class="btn-uploadimg"
+                    ><i class="fas fa-plus"></i></a
+                  ><input
+                    type="file"
+                    style="display:none"
+                    onchange="readImgUrl(this);"
+                    accept="image/gif , image/png, image/jpg, image/jpeg"
+                  />
+                </div>
+              </div>
+              <div
+                class="col-md-4 col-sm-4 text-bold text-medium text-center text-blue"
+              >
+                <div class="img-container">
+                  <a
+                    href="javascript:void(0)"
+                    onclick="uploadImg(this)"
+                    class="btn-uploadimg"
+                    ><i class="fas fa-plus"></i></a
+                  ><input
+                    type="file"
+                    style="display:none"
+                    onchange="readImgUrl(this);"
+                    accept="image/gif , image/png, image/jpg, image/jpeg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="tool-tip-text">Add Images to make ads responsive</div>
+          </div>
+        </section>
+
+        <section id="contactInfo" class="border-bottom-light-grey">
+          <div class="form-controls">
+            <input
+              type="text"
+              name="name"
+              class="text-box form-element name not-validated"
+              placeholder="Your name..."
+              onblur="filterInput(this)"
+            />
+            <span class="form-validate validate-img text-red">
+              <img src="./Assets/Images/Warning.png" alt="alert" />
+            </span>
+            <p class="form-validate validate-text text-red">
+              Please enter your name
+            </p>
+          </div>
+          <div class="form-controls">
+            <input
+              type="text"
+              name="phone"
+              class="text-box form-element not-validated"
+              placeholder="Your contact number..."
+              onkeydown="return filterNumbers(event)"
+              onblur="filterInput(this)"
+            />
+            <span class="form-validate validate-img text-red">
+              <img src="./Assets/Images/Warning.png" alt="alert" />
+            </span>
+            <p class="form-validate validate-text text-red">
+              Please enter a valid contact number
+            </p>
+          </div>
+        </section>
+
+        <section id="addressInfo">
+          <div class="form-controls">
+            <select
+              class="form-control form-control-sm combo-box form-element not-validated"
+              id="provinceOption"
+              name="province"
+              onblur="filterInput(this)"
+            >
+              <option>Select provice</option>
+              <option>Azad Kashmir</option>
+              <option>Balochistan</option>
+              <option>Federally Administered Tribal Areas</option>
+              <option>Islamabad Capital Territory</option>
+              <option>Khyber Pakhtunkhwa</option>
+              <option>Northern Areas</option>
+              <option>Punjab</option>
+              <option>Sindh</option>
+            </select>
+            <span class="form-validate validate-img text-red">
+              <img src="./Assets/Images/Warning.png" alt="alert" />
+            </span>
+            <p class="form-validate validate-text text-red">
+              Please select province
+            </p>
+          </div>
+          <div class="form-controls">
+            <select
+              class="form-control form-control-sm combo-box form-element not-validated"
+              id="cityOption"
+              name="city"
+              onblur="filterInput(this)"
+            >
+              <option>Select city</option>
+            </select>
+            <span class="form-validate validate-img text-red">
+              <img src="./Assets/Images/Warning.png" alt="alert" />
+            </span>
+            <p class="form-validate validate-text text-red">
+              Please select city
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <div class="form-controls">
+            <a
+              href="#"
+              class="btn btn-login model-btn"
+              onclick="submitAd()"
+              type="button"
+              id="btnSubmit"
+              >Submit Ad</a
+            >
+          </div>
+        </section>
+      </form>
+    </div>
+    <!-- end of main content -->
+
+    <!-- message model dialog after successfull submit -->
+    <div id="modelDialog" class="model">
+      <div class="model-content closing">
+        <div class="model-header">
+          <span class="model-close text-large hover-text-blue"
+            ><i class="fa fa-window-close"></i
+          ></span>
+          <h2 class="heading text-larger text-green"></h2>
+        </div>
+        <div class="model-body"></div>
+      </div>
+    </div>
+    <!-- end of message model dialog -->
+
+    <!-- spiner -->
+    <div class="model" id="spinerDialog">
+      <div class="spinmode-content"><div class="spiner"></div></div>
+    </div>
+    <!-- end of spiner -->
+
+    <!-- footer -->
+    <footer class="border-top-grey2px">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 logo"></div>
+          <div class="col-md-2">
+            <ul>
+              <li><a href="#">Location Map</a></li>
+              <li><a href="#">Popular Search</a></li>
+              <li><a href="#">Archive</a></li>
+              <li><a href="#">Sitemap</a></li>
+            </ul>
+          </div>
+          <div class="col-md-2">
+            <ul>
+              <li><a href="#">Term of user</a></li>
+              <li><a href="#">Help & Contact</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <ul>
+              <li><a href="#">Join Olx</a></li>
+              <li><a href="#">Happy Olxers</a></li>
+            </ul>
+          </div>
+          <div class="col-md-2">
+            <ul>
+              <li class="text-bold text-medium">Contact Us</li>
+              <li><i></i><a href="#">help@olx.com.pk</a></li>
+              <li><i></i>080010101</li>
+              <li>
+                <i></i>Business Packages <br />
+                <a href="#">Click here</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- end of footer -->
+
+    <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+    <script>
+      // Iniialize Firebase
+      var config = {
+        apiKey: "AIzaSyClrMisTvQ2-J2lOL8TXIg6PfFRe7q88Jg",
+        authDomain: "olx-pk-6b561.firebaseapp.com",
+        databaseURL: "https://olx-pk-6b561.firebaseio.com",
+        projectId: "olx-pk-6b561",
+        storageBucket: "",
+        messagingSenderId: "251615634628"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script src="js/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="js/tether.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/authentication.js"></script>
+    <script src="js/model.js"></script>
+    <script src="pushMsg.js"></script>
+    <script src="js/iziToast.min.js"></script>
+    <script src="js/posting.js"></script>
+  </body>
+</html>

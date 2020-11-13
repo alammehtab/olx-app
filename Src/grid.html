@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+      integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/commonStyle.css" />
+  </head>
+  <body>
+    <!-- header -->
+    <div class="container">
+      <section class="row header">
+        <div class="col-md-1">
+          <img src="../Assets/Images/Olx logo.svg" alt="logo" />
+        </div>
+        <div class="col-md-6 pull-down text-bold heading text-large">
+          Pakistan's Largest Marketplace
+        </div>
+        <div class="col-md-2 pull-down drop-down">
+          <a href="#" class="btn btn-account" id="myAccount">
+            <i class="fas fa-user"></i> My Account</a
+          >
+
+          <!-- drop down my account -->
+          <ul class="dropdown-content" id="dropDown">
+            <li class="text-bold"><i class="fas fa-bars"></i> My Account</li>
+            <li class="hover-back-orange hover-text-white">
+              <a href="#" class="text-bold">Ads</a>
+            </li>
+            <li class="hover-back-orange">
+              <a href="#" class="hover-text-white text-bold">Messages</a>
+            </li>
+            <li class="hover-back-orange">
+              <a href="#" class="hover-text-white text-bold">Payment</a>
+            </li>
+            <li class="hover-back-orange">
+              <a href="#" class="hover-text-white text-bold">Settings</a>
+            </li>
+            <span style="border-top:2px solid rgb(186, 182, 182);"></span>
+            <li class="text-bold text-whiteSmoke">
+              <i class="fas fa-heart text-large"></i> Favorties
+            </li>
+            <li class="hover-back-orange">
+              <a href="#" class="hover-text-white text-bold">Ads</a>
+            </li>
+            <li class="hover-back-orange">
+              <a href="#" class="hover-text-white text-bold">Searches</a>
+            </li>
+            <li class="back-light-gray">
+              <a href="#" class="text-bold text-dark-grey" onclick="Logout()"
+                >Logout</a
+              >
+            </li>
+          </ul>
+          <!-- end of drop down -->
+        </div>
+        <div class="col-md-2 pull-down">
+          <a href="#" class="btn btn-submit-ad">Submit an Ad</a>
+        </div>
+      </section>
+    </div>
+    <!-- end of header -->
+
+    <!-- gallery container -->
+    <div class="grid-container grid-gallery container" id="gridView">
+      <div class="grid-item">
+        <div class="img">Image</div>
+        <div class="matter">
+          Matter <span class="pull-right">This is a price</span>
+        </div>
+      </div>
+    </div>
+    <!-- end of gallerycontainer -->
+    <div class="form-controls">
+      <a href="#" class="btn btn-login" onclick="getData();">Fetch Data</a>
+    </div>
+    <!-- footer -->
+    <footer class="border-top-grey2px">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 logo"></div>
+          <div class="col-md-2">
+            <ul>
+              <li><a href="#">Location Map</a></li>
+              <li><a href="#">Popular Search</a></li>
+              <li><a href="#">Archive</a></li>
+              <li><a href="#">Sitemap</a></li>
+            </ul>
+          </div>
+          <div class="col-md-2">
+            <ul>
+              <li><a href="#">Term of user</a></li>
+              <li><a href="#">Help & Contact</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <ul>
+              <li><a href="#">Join Olx</a></li>
+              <li><a href="#">Happy Olxers</a></li>
+            </ul>
+          </div>
+          <div class="col-md-2">
+            <ul>
+              <li class="text-bold text-medium">Contact Us</li>
+              <li><i></i><a href="#">help@olx.com.pk</a></li>
+              <li><i></i>080010101</li>
+              <li>
+                <i></i>Business Packages <br />
+                <a href="#">Click here</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- end of footer -->
+
+    <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+    <script>
+      // Iniialize Firebase
+      var config = {
+        apiKey: "AIzaSyClrMisTvQ2-J2lOL8TXIg6PfFRe7q88Jg",
+        authDomain: "olx-pk-6b561.firebaseapp.com",
+        databaseURL: "https://olx-pk-6b561.firebaseio.com",
+        projectId: "olx-pk-6b561",
+        storageBucket: "",
+        messagingSenderId: "251615634628"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script src="js/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="js/tether.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/authentication.js"></script>
+    <script src="js/filterAds.js"></script>
+  </body>
+</html>

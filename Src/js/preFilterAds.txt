@@ -1,0 +1,206 @@
+function filterCategory() {
+  if (cmbCategory.selectedIndex > 0) {
+    if (filteredData.length > 0) {
+      if (cmbLocation.selectedIndex > 0)
+        //console.log('filtering by caterogy'+cmbCategory.options[cmbCategory.selectedIndex].value)
+        displayData(
+          advanceFilter(
+            "category",
+            cmbCategory.options[cmbCategory.selectedIndex].value
+          )
+        );
+      else displayData(getData());
+    } else {
+      displayData(getData());
+    }
+  }
+}
+
+function filterLocation() {
+  if (cmbLocation.selectedIndex > 0) {
+    if (filteredData.length > 0) {
+      if (cmbCategory.selectedIndex > 0)
+        //console.log('filtering by caterogy'+cmbCategory.options[cmbCategory.selectedIndex].value)
+        displayData(
+          advanceFilter(
+            "province",
+            cmbLocation.options[cmbLocation.selectedIndex].value
+          )
+        );
+      else displayData(getData());
+    } else {
+      displayData(getData());
+    }
+  }
+}
+async function fetchData(category = "") {
+  // let cat = category;
+  // if (category != "") {
+  //   cat = cat
+  //     .trim()
+  //     .split(" ")
+  //     .join("_");
+  //   cat = cat.split(",").join("");
+  // } else {
+  //   if (cmbLocation.selectedIndex > 0)
+  //     cat = "Location/" + cmbLocation.options[cmbLocation.selectedIndex].value;
+  //   // else
+  //   // cat = "Ads/allData/"+cmbLocation.options[cmbLocation.selectedIndex].value;
+  // }
+  try {
+    let data = await fetch(`http://localhost:5001/Ads/${cat}`, {
+      method: "GET"
+    });
+    let json = await data.json();
+    return json;
+  } catch (err) {
+    console.log("Error fetching data", err);
+  }
+}
+
+//method to get the data from fetchdata method and add into array
+async function getData() {
+  showSpinModel();
+  let data = null;
+  try {
+    //showSpinModel();
+    // if (cmbCategory.selectedIndex > 0) {
+    //   data = await fetchData(
+    //     cmbCategory.options[cmbCategory.selectedIndex].value
+    //   );
+    // } else {
+    //   data = await fetchData();
+    // }
+    // filteredData = data;
+    // return data;
+  } catch (err) {
+    hideSpinModel();
+    console.log("Error Filtering Data", err);
+  }
+}
+
+async function advanceFilter(searchBy, data) {
+  showSpinModel();
+  let advanceFilteredData = [];
+  try {
+    for (let i = 0; i < filteredData.length; i++) {
+      if (filteredData[i][searchBy] === data)
+        advanceFilteredData.push(filteredData[i]);
+    }
+  } catch (err) {
+    hideSpinModel();
+    console.log(err);
+  }
+  return advanceFilteredData;
+}
+
+async function displayData(objArray) {
+  finalFilteredData = [];
+  finalFilteredData = await objArray;
+  hideSpinModel();
+  gridContainer.innerHTML = "";
+  grid.style.display = "grid";
+  grid.innerHTML = "";
+  if (finalFilteredData.length > 0) {
+    for (let i = 0; i < finalFilteredData.length; i++) {
+      appdenDataInHTML(finalFilteredData[i], grid, i);
+    }
+  }
+  //   //console.log(finalFilteredData);
+  //   //console.log(finalFilteredDataKeys);
+  //   hideSpinModel();
+
+  //   if (grid.innerHTML != "") {
+  //     gridContainer.innerHTML = "";
+  //     gridContainer.appendChild(grid);
+  //     grid.style.display = "grid";
+  //   } else {
+  //     alert("no records found");
+  //   }
+}
+
+
+
+=======================================Add to Favourite==================================
+
+console.log("addToFavourite==>", Elem);
+  var isAlreadyAddedToFav = Elem.classList.contains("favourite");
+  var eleId = Elem.parentNode.parentNode.id;
+  var favouriteKey = getFavourites("userFavouriteKey");
+  var favourites = localStorage.userFavourites;
+  if (isAlreadyAddedToFav) {
+    favourites = JSON.parse(favourites);
+    //REMOVE FROM FAVOURITES
+    favourites.splice(eleId, 1);
+    favouriteKey.splice(eleId, 1);
+  } else {
+    if (favouriteKey == null) {
+      favouriteKey = [];
+      favourites = [];
+    } else {
+      favourites = JSON.parse(favourites);
+    }
+    if (!favouriteKey.includes(Elem.id)) {
+      let filteredData_d = null;
+      try {
+        filteredData_d = filteredData;
+      } catch {
+        filteredData_d = favArray;
+      }
+      favouriteKey.push(Elem.id);
+      favourites.push(filteredData_d[eleId]);
+    }
+  }
+  let currentAuthId = localStorage["currentAuthId"];
+  if (currentAuthId) {
+    let obj = {
+      favourites: favourites,
+      email: currentAuthId
+    };
+    let JSONObj = JSON.stringify(obj);
+    fetch("http://localhost:5001/Ads/Favourites", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      body: JSONObj
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(json => {
+        if (json.status) {
+          if (isAlreadyAddedToFav) Elem.classList.remove("favourite");
+          else Elem.classList.add("favourite");
+          localStorage["userFavourites"] = JSON.stringify(favourites);
+          localStorage["userFavouriteKey"] = JSON.stringify(favouriteKey);
+        }
+      });
+  }
+
+
+==========================================================================================
+
+
+
+
+======================filter fav ad====================
+favArray = json[0].favourites;
+    for (const key in favArray) {
+      const obj = favArray[key];
+      buildFavAds(obj, grid, key);
+    }
+
+
+    ------------------if not internet------------------
+    let fav_d = localStorage["userFavourites"];
+    if (fav_d != null && JSON.parse(fav_d).length > 0) {
+      let json = JSON.parse(fav_d);
+      favArray = json;
+      for (const key in favArray) {
+        const obj = favArray[key];
+        buildFavAds(obj, grid, key);
+      }
+    }
+    ---------------------------------------------------
+==============================

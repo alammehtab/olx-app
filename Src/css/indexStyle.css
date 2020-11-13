@@ -1,0 +1,93 @@
+section {
+  margin-top: 15px; }
+
+.search-engine {
+  padding: 20px 10px 20px 10px;
+  background-image: url("../../Assets/Images/search-background.png"); }
+  .search-engine form#searchEngine {
+    border-radius: 5px;
+    padding: 10px 5px 10px 5px;
+    background-color: rgba(0, 0, 0, 0.479); }
+    .search-engine form#searchEngine input, .search-engine form#searchEngine .btn-search {
+      height: 40px; }
+    .search-engine form#searchEngine .search-container {
+      padding-bottom: -5px; }
+    .search-engine form#searchEngine .text-box, .search-engine form#searchEngine .combo-box {
+      margin-bottom: 0px; }
+    .search-engine form#searchEngine .btn-search {
+      background-color: blue;
+      border: 2px solid white;
+      color: white;
+      width: 120px; }
+    .search-engine form#searchEngine .btn-search:hover {
+      background-color: white;
+      color: blue;
+      border: 2px solid blue; }
+
+.featured-ads .row .img-thumbnail {
+  padding: 5px; }
+
+.featured-ads .row p {
+  padding: 2px;
+  margin: 0;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background-color: rgba(0, 0, 0, 0.384);
+  color: white;
+  font-size: 100%;
+  max-width: 95%; }
+
+.featured-ads .row .img-thumbnail:hover {
+  padding: 10px; }
+  .featured-ads .row .img-thumbnail:hover p {
+    background-color: rgba(110, 66, 233, 0.384); }
+
+.featured-ads .row div {
+  padding: 0;
+  height: 160px;
+  border: 0px;
+  cursor: pointer; }
+
+.featured-ads .row div:hover p {
+  background-color: rgba(76, 76, 243, 0.753); }
+
+.featured-ads img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px; }
+
+.stories {
+  margin-bottom: 20px; }
+  .stories .thumbnail-jumbo {
+    padding: 0px;
+    border: 1px solid #cacaca;
+    border-radius: 5px;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    cursor: pointer; }
+  .stories p {
+    padding: 5px; }
+  .stories img {
+    width: 100%;
+    height: 180px; }
+
+@media screen and (max-width: 660px) {
+  .search-engine .searchbox-container {
+    display: none; } }
+
+@media (min-width: 400px) and (max-width: 768px) {
+  .cmblocation-container, .cmbcategory-container {
+    width: 50% !important;
+    display: inline-block; }
+  .searchbox-container {
+    display: none; }
+  .btnsearch-container {
+    display: none; } }
+
+@media (min-width: 200px) and (max-width: 400px) {
+  .cmblocation-container, .cmbcategory-container {
+    margin-top: 10px; }
+  .btnsearch-container {
+    display: none; } }

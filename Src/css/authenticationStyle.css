@@ -1,0 +1,77 @@
+.login-container {
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%; }
+  .login-container #loginWithFb {
+    padding: 15px 23% 15px 23%; }
+    .login-container #loginWithFb .btn-login {
+      padding: 15px;
+      min-width: 70px;
+      width: 100%;
+      height: 50px;
+      border-color: #0c00b8;
+      color: #0c00b8;
+      background-color: white; }
+    .login-container #loginWithFb .btn-login:hover {
+      background-color: #0c00b8;
+      color: white;
+      width: 100%; }
+
+.btn-login {
+  color: white; }
+
+.register-container {
+  display: none;
+  width: 70%;
+  margin-bottom: 20px; }
+  .register-container .form-controls {
+    width: 60%;
+    margin: auto; }
+
+.register-steptwo-model .user-img {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  position: relative;
+  border: 1px solid #dfdcdc;
+  border-radius: 5px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  image-rendering: optimizeQuality;
+  margin-bottom: 15px; }
+
+@-webkit-keyframes animatebottom {
+  from {
+    top: -70px;
+    opacity: 0; }
+  to {
+    top: 70;
+    opacity: 1; } }
+
+@keyframes animatebottom {
+  from {
+    bottom: -70px;
+    opacity: 0; }
+  to {
+    bottom: 70px;
+    opacity: 1; } }
+
+@media screen and (max-width: 700px) {
+  .login-container {
+    width: 100%;
+    padding: 10px; }
+    .login-container #loginWithFb {
+      padding: 15px 10% 15px 10%; } }
+
+@media screen and (max-width: 700px) {
+  .login-container {
+    width: 85%; } }
+
+@media screen and (min-width: 700px) and (max-width: 1400px) {
+  .login-container {
+    width: 80%; } }
+
+@media screen and (max-width: 1400px) and (min-width: 1000px) {
+  .login-container {
+    width: 40%; } }

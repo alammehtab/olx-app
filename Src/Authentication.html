@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Please Login Into OLX Account First</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+      integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/commonStyle.css" />
+    <link rel="stylesheet" href="css/model.css" />
+    <link rel="stylesheet" href="css/iziToast.min.css" />
+    <link rel="stylesheet" href="css/authenticationStyle.css" />
+  </head>
+
+  <body>
+    <!-- header -->
+    <section class="container header">
+      <nav class="navbar navbar-expand-md navbar-dark">
+        <a class="logo"
+          ><img src="../Assets/Images/Olx logo.svg" alt="logo"
+        /></a>
+        <span class="text-bold heading heading-large text-large"
+          >Pakistan's Largest Marketplace</span
+        >
+        <span
+          class="text-bold heading heading-small text-large"
+          style="display:none"
+          >OLX PK</span
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#downDownMyAccount"
+          aria-controls="#downDownMyAccount"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          style="z-index:1;"
+        >
+          <span class="fas fa-bars text-large text-orange"></span>
+        </button>
+        <div class="drop-down">
+          <a href="answers.html" class="btn btn-account" id="myAccount">
+            <i class="fas fa-user "></i> My Account</a
+          >
+
+          <!-- drop down my account -->
+          <div class="collapse" id="downDownMyAccount">
+            <ul class="nav navbar-nav mr-auto">
+              <li class="hover-back-orange">
+                <a href="answers.html" class="text-bold text-blue">
+                  My Account</a
+                >
+              </li>
+              <li class="hover-back-orange">
+                <a href="postingAds.html" class="text-bold text-blue"
+                  >Submit an Ad</a
+                >
+              </li>
+              <li class="back-light-gray btn-logout">
+                <a
+                  href="#"
+                  class="text-bold text-dark-grey"
+                  onclick="Logout()"
+                  id="btnLogout"
+                  >Logout</a
+                >
+              </li>
+            </ul>
+          </div>
+          <!-- end of drop down -->
+        </div>
+        <a href="postingAds.html" class="btn btn-submit-ad">Submit an Ad</a>
+      </nav>
+    </section>
+    <!-- end of header -->
+
+    <!-- login container -->
+    <div class="container login-container" id="loginContainer">
+      <div class="border-panel " id="loginWithEmail">
+        <form action="return false" id="login-form">
+          <div class="form-controls">
+            <input
+              type="email"
+              name="email"
+              class="text-box not-validated form-element"
+              placeholder="Email..."
+              onblur="filterInput(this)"
+            />
+            <span class="form-validate validate-img text-red">
+              <img src="./Assets/Images/Warning.png" alt="alert" />
+            </span>
+            <p class="form-validate validate-text text-red">
+              Please enter a valid email address
+            </p>
+          </div>
+          <div class="form-controls">
+            <input
+              type="password"
+              name="password"
+              class="text-box not-validated form-element"
+              placeholder="Password..."
+              onblur="filterInput(this)"
+            />
+            <span class="form-validate validate-img text-red">
+              <img src="./Assets/Images/Warning.png" alt="alert" />
+            </span>
+            <p class="form-validate validate-text text-red">
+              Please enter password
+            </p>
+          </div>
+          <div class="form-controls">
+            <input
+              type="checkbox"
+              style="margin-right:20px;"
+              onclick="rememberUser(this)"
+              id="rememberMe"
+            /><label for="rememberMe" style="cursor: pointer;"
+              >Remember Me</label
+            >
+          </div>
+          <div class="form-controls">
+            <a href="#" class="btn btn-login text-bold" onclick="Login()"
+              >Login</a
+            >
+          </div>
+          <div class="form-controls">
+            <a href="#" style="margin-right:5%">Forget password?</a>
+            <a href="javascript:void(0)" onclick="showRegisterForm()"
+              >New User? Register here</a
+            >
+          </div>
+        </form>
+        <div class="footer"></div>
+      </div>
+      <!-- <div class="border-panel" id="loginWithFb">
+            <p class="text-bold text-medium text-center">Login With Facebook</p>
+            <a href="#" class="btn btn-login text-bold text-blue">Facebook</a>
+        </div> -->
+      <p class="text-center">
+        By logging in, you accept our <a href="#">Terms of Use</a>
+      </p>
+    </div>
+    <!-- end of login container -->
+
+    <!-- register container -->
+
+    <!-- start of step one -->
+    <div class="container register-container" id="registerContainer">
+      <div class="border-panel form-controls">
+        <form action="return false" id="register-form">
+          <div class="form-controls">
+            <input
+              type="email"
+              name="email"
+              class="text-box not-validated form-element"
+              placeholder="Enter your email..."
+              onblur="filterInput(this)"
+            />
+            <span class="form-validate validate-img text-red">
+              <img src="./Assets/Images/Warning.png" alt="alert" />
+            </span>
+            <p class="form-validate validate-text text-red">
+              Please enter a valid email address
+            </p>
+          </div>
+          <div class="form-controls">
+            <input
+              type="password"
+              name="password"
+              class="text-box not-validated password form-element"
+              placeholder="Enter your password..."
+              onblur="filterInput(this)"
+            />
+            <span class="form-validate validate-img text-red">
+              <img src="./Assets/Images/Warning.png" alt="alert" />
+            </span>
+            <p class="form-validate validate-text text-red">
+              Please enter password
+            </p>
+          </div>
+          <div class="form-controls">
+            <input
+              type="password"
+              name="rePassword"
+              class="text-box not-validated form-element"
+              placeholder="Re-enter your password..."
+              onblur="filterInput(this)"
+            />
+            <span class="form-validate validate-img text-red">
+              <img src="./Assets/Images/Warning.png" alt="alert" />
+            </span>
+            <p class="form-validate validate-text text-red">
+              Password not matched
+            </p>
+          </div>
+          <div class="form-controls">
+            <a
+              href="javascript:void(0)"
+              class="btn btn-login text-bold"
+              onclick="RegisterUser()"
+              >Register</a
+            >
+          </div>
+          <div class="form-controls">
+            <input
+              type="checkbox"
+              style="margin-right:20px;"
+              id="acceptTerm"
+            /><label for="acceptTerm" style="cursor: pointer;"
+              >Accept OLX
+              <a href="#" class="text-blue text-bold">Term of Use</a></label
+            >
+          </div>
+          <div class="form-controls">
+            <a href="javascript:void(0)" onclick="showLoginForm()"
+              >Already OLX User? Login here</a
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- end of step one -->
+
+    <!-- start of step two -->
+    <form onsubmit="return false" id="stepTwoForm">
+      <div class="model register-steptwo-model" id="modelDialog">
+        <div class="model-content">
+          <div class="model-header">
+            <h2 class="heading text-medium text-green"></h2>
+            <span class="model-close text-large hover-text-blue hide"
+              ><i class="fa fa-window-close"></i
+            ></span>
+          </div>
+          <div class="model-body"></div>
+          <div class="model-footer"></div>
+        </div>
+      </div>
+    </form>
+    <!-- end of step two -->
+    <!-- end of register container -->
+
+    <!-- spiner -->
+    <div class="model" id="spinerDialog">
+      <div class="spinmode-content"><div class="spiner"></div></div>
+    </div>
+    <!-- end of spiner -->
+
+    <!-- footer -->
+    <footer class="border-top-grey2px">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 logo"></div>
+          <div class="col-md-2">
+            <ul>
+              <li><a href="#">Location Map</a></li>
+              <li><a href="#">Popular Search</a></li>
+              <li><a href="#">Archive</a></li>
+              <li><a href="#">Sitemap</a></li>
+            </ul>
+          </div>
+          <div class="col-md-2">
+            <ul>
+              <li><a href="#">Term of user</a></li>
+              <li><a href="#">Help & Contact</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <ul>
+              <li><a href="#">Join OLX</a></li>
+              <li><a href="#">Happy OLXers</a></li>
+            </ul>
+          </div>
+          <div class="col-md-2">
+            <ul>
+              <li class="text-bold text-medium">Contact Us</li>
+              <li><i></i><a href="#">help@olx.com.pk</a></li>
+              <li><i></i>080010101</li>
+              <li>
+                <i></i>Business Packages <br />
+                <a href="#">Click here</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- end of footer -->
+
+    <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+    <script>
+      // Iniialize Firebase
+      var config = {
+        apiKey: "AIzaSyClrMisTvQ2-J2lOL8TXIg6PfFRe7q88Jg",
+        authDomain: "olx-pk-6b561.firebaseapp.com",
+        databaseURL: "https://olx-pk-6b561.firebaseio.com",
+        projectId: "olx-pk-6b561",
+        storageBucket: "",
+        messagingSenderId: "251615634628"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script src="js/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="js/tether.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jaaulde-cookies.js"></script>
+    <script src="https://unpkg.com/b64-to-blob"></script>
+    <script src="js/authentication.js"></script>
+    <script src="js/model.js"></script>
+    <script src="js/iziToast.min.js"></script>
+    <script src="pushMsg.js"></script>
+    <script src="js/login_signup.js"></script>
+  </body>
+</html>

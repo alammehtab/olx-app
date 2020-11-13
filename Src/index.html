@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+      Free classifieds in Pakistan, classified ads in Pakistan (For Sale in
+      Pakistan, Vehicles in Pakistan, Real Estate in Pakistan, Community in
+      Pakistan,...)
+    </title>
+    <link rel="stylesheet" href="./css/fontawesome.css" />
+    <link rel="stylesheet" href="css/iziToast.min.css">
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/commonStyle.css" />
+    <link rel="stylesheet" href="css/indexStyle.css" />
+    <link rel="stylesheet" href="css/model.css" />
+    <link rel="manifest" href="manifest.json" />
+    <!-- Add to home screen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="OLX PK" />
+    <link rel="apple-touch-icon" href="Assets/icons/icon-144x144.png" />
+    <!-- Add to home screen for windows -->
+    <meta
+      name="msapplication-TileImage"
+      content="Assets/icons/icon-144x144.png"
+    />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+
+    <!-- Firebase App is always required and must be first -->
+    <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-app.js"></script>
+
+    <!-- Add additional services that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-functions.js"></script>
+  </head>
+
+  <body>
+    <main class="container main-body">
+      <section class="container header">
+        <nav class="navbar navbar-expand-md navbar-dark">
+          <a class="logo"><img src="Assets/Images/Olx logo.svg" alt="logo"/></a>
+          <span class="text-bold heading heading-large text-large"
+            >Pakistan's Largest Marketplace</span
+          >
+          <span
+            class="text-bold heading heading-small text-large"
+            style="display:none"
+            >OLX PK</span
+          >
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#downDownMyAccount"
+            aria-controls="#downDownMyAccount"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+            style="z-index:1;"
+          >
+            <span class="fas fa-bars text-large text-orange"></span>
+          </button>
+          <div class="drop-down">
+            <a href="answers.html" class="btn btn-account" id="myAccount">
+              <i class="fas fa-user "></i> My Account</a
+            >
+
+            <!-- drop down my account -->
+            <div class="collapse" id="downDownMyAccount">
+              <ul class="nav navbar-nav mr-auto">
+                <li class="hover-back-orange">
+                  <a href="answers.html" class="text-bold text-blue">
+                    My Account</a
+                  >
+                </li>
+                <li class="hover-back-orange">
+                  <a href="postingAds.html" class="text-bold text-blue"
+                    >Submit an Ad
+                  </a>
+                </li>
+                <li class="back-light-gray btn-logout">
+                  <a
+                    href="#"
+                    class="text-bold text-dark-grey"
+                    onclick="Logout()"
+                    id="btnLogout"
+                    >Logout</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <!-- end of drop down -->
+          </div>
+          <a href="postingAds.html" class="btn btn-submit-ad">Submit an Ad</a>
+        </nav>
+      </section>
+
+      <section>
+        <div class="search-engine container-fluid">
+          <form action="" onsubmit="return false" id="searchEngine">
+            <div class="row search-container">
+              <div class="col-md-3 col-sm-5 cmblocation-container">
+                <select
+                  name="location"
+                  id="cmbLocation"
+                  class="combo-box"
+                  onchange="getData()"
+                >
+                  <option>Select location</option>
+                  <option>Azad Kashmir</option>
+                  <option>Balochistan</option>
+                  <option>Federally Administered Tribal Areas</option>
+                  <option>Islamabad Capital Territory</option>
+                  <option>Khyber Pakhtunkhwa</option>
+                  <option>Northern Areas</option>
+                  <option>Punjab</option>
+                  <option>Sindh</option>
+                </select>
+              </div>
+              <div class="col-md-3 col-sm-5 cmbcategory-container">
+                <select
+                  name="category"
+                  id="cmbCategory"
+                  class="combo-box"
+                  onchange="getData()"
+                >
+                  <option>Select category</option>
+                  <option>Property for Sale</option>
+                  <option>Property for Rent</option>
+                  <option>Vehicles</option>
+                  <option>Bikes</option>
+                  <option>Electronics & Home Appliances</option>
+                  <option>Mobiles</option>
+                  <option>Jobs</option>
+                  <option>Bussiness, Industrial & Agriculture</option>
+                  <option>Furniture & Home Decor</option>
+                  <option>Animals</option>
+                  <option>Books, Sports & Hobbies</option>
+                  <option>Fashion & Beauty</option>
+                  <option>Kids</option>
+                </select>
+              </div>
+              <div class="col-md-3 col-sm-4 searchbox-container">
+                <input
+                  type="text"
+                  class="text-box"
+                  placeholder="Enter owner name.."
+                  id="textboxSearchText"
+                />
+              </div>
+              <div class="col-md-3 col-sm-3 btnsearch-container">
+                <a href="#" class="btn btn-search" onclick="getData();"
+                  ><i class="fas fa-search"></i> &nbsp; Search</a
+                >
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- main content -->
+      <div class="main-content container-fluid" id="mainContent">
+        <section>
+          <div class="navigate-adds container-fluid">
+            <div class="row">
+              <div
+                class="col-md-2 col-sm-4 panel"
+                onclick="changeCmbCategoryIndex(this)"
+                id="1"
+              >
+                <i
+                  class="fas fa-hotel text-larger-font text-red text-center"
+                ></i>
+                <p class="text-bold text-medium">Property for Sale</p>
+              </div>
+              <div
+                class="col-md-2 col-sm-4 panel"
+                onclick="changeCmbCategoryIndex(this)"
+                id="2"
+              >
+                <i
+                  class="fas fa-hotel text-larger-font text-purple text-center"
+                ></i>
+                <p class="text-bold text-medium">Property for Rent</p>
+              </div>
+              <div
+                class="col-md-2 col-sm-4 panel"
+                onclick="changeCmbCategoryIndex(this)"
+                id="3"
+              >
+                <i
+                  class="fas fa-car text-larger-font text-center text-blue"
+                ></i>
+                <p class="text-bold text-medium">Vehicles</p>
+              </div>
+              <div
+                class="col-md-2 col-sm-4 panel"
+                onclick="changeCmbCategoryIndex(this)"
+                id="4"
+              >
+                <i
+                  class="fas fa-motorcycle text-larger-font text-center text-orange"
+                ></i>
+                <p class="text-bold text-medium">Bikes</p>
+              </div>
+              <div
+                class="col-md-2 col-sm-4 panel"
+                onclick="changeCmbCategoryIndex(this)"
+                id="5"
+              >
+                <i
+                  class="fas fa-laptop text-larger-font text-center text-light-green"
+                ></i>
+                <p class="text-bold text-medium">
+                  Electronics & Home Appliances
+                </p>
+              </div>
+              <div
+                class="col-md-2 col-sm-4 panel"
+                onclick="changeCmbCategoryIndex(this)"
+                id="6"
+              >
+                <i
+                  class="fas fa-mobile-alt text-center text-larger-font text-purple"
+                ></i>
+                <p class="text-bold text-medium">Mobiles</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div
+                class="col-md-2 col-sm-4 panel"
+                onclick="changeCmbCategoryIndex(this)"
+                id="7"
+              >
+                <i
+                  class="fas fa-briefcase text-larger-font text-center text-green"
+                ></i>
+                <p class="text-bold text-medium">Jobs</p>
+              </div>
+              <div
+                class="col-md-2 col-sm-4 panel"
+                onclick="changeCmbCategoryIndex(this)"
+                id="8"
+              >
+                <i
+                  class="fas fa-cogs text-larger-font text-center text-light-blue"
+                ></i>
+                <p class="text-bold text-medium">Services</p>
+              </div>
+              <div
+                class="col-md-2 col-sm-4 panel"
+                onclick="changeCmbCategoryIndex(this)"
+                id="9"
+              >
+                <i
+                  class="fas fa-handshake text-larger-font text-center text-dark-red"
+                ></i>
+                <p class="text-bold text-medium">
+                  Bussiness, Industrial & Agriculture
+                </p>
+              </div>
+              <div
+                class="col-md-2 col-sm-4 panel"
+                onclick="changeCmbCategoryIndex(this)"
+                id="10"
+              >
+                <i
+                  class="fas fa-home text-larger-font text-center text-blue"
+                ></i>
+                <p class="text-bold text-medium">Furniture & Home Decor</p>
+              </div>
+              <div
+                class="col-md-2 col-sm-4 panel"
+                onclick="changeCmbCategoryIndex(this)"
+                id="11"
+              >
+                <i
+                  class="fab fa-themeisle text-larger-font text-center text-cyan"
+                ></i>
+                <p class="text-bold text-medium">Animals</p>
+              </div>
+              <div
+                class="col-md-2 col-sm-4 panel"
+                onclick="changeCmbCategoryIndex(this)"
+                id="12"
+              >
+                <i
+                  class="fas fa-swatchbook text-larger-font text-center text-light-blue"
+                ></i>
+                <p class="text-bold text-medium">Books, Sports & Hobbies</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div
+                class="col-md-2 col-sm-4 panel"
+                onclick="changeCmbCategoryIndex(this)"
+                id="13"
+              >
+                <i
+                  class="fas fa-glasses text-larger-font text-center text-pink"
+                ></i>
+                <p class="text-bold text-medium">Fashion & Beauty</p>
+              </div>
+              <div
+                class="col-md-2 col-sm-4 panel"
+                onclick="changeCmbCategoryIndex(this)"
+                id="14"
+              >
+                <i
+                  class="fas fa-child text-larger-font text-center text-green"
+                ></i>
+                <p class="text-bold text-medium">Kids</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div id="gridContainer">
+          <section>
+            <div class="featured-ads container-fluid">
+              <h2 class="heading upper">FEATURED LISTING</h2>
+
+              <div class="row">
+                <div class="col-md-3 col-sm-3 col-xm-6 img1 img-thumbnail">
+                  <img
+                    src="Assets/Images/featured_img1.jpg"
+                    alt="featured ad 1"
+                  />
+                  <p>INVEST IN GAWADAR</p>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xm-6 img2 img-thumbnail">
+                  <img
+                    src="Assets/Images/featured_img2.jpg"
+                    alt="featured ad 2"
+                  />
+                  <p>INVEST IN DUBAI</p>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xm-6 img3 img-thumbnail">
+                  <img
+                    src="Assets/Images/featured_img3.png"
+                    alt="featured ad 3"
+                  />
+                  <p>PROPERTY FOR SALE</p>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xm-6 img4 img-thumbnail">
+                  <img
+                    src="Assets/Images/featured_img4.png"
+                    alt=" featured ad 4"
+                  />
+                  <p>CARS</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Olx Stories -->
+          <section>
+            <div class="stories container-fluid">
+              <h2 class="heading upper">GREAT STORIES</h2>
+              <div class="row">
+                <div class="col-md-3 col-sm-5 thumbnail-jumbo">
+                  <img
+                    src="Assets/Images/story_img1.png"
+                    alt="story 1"
+                    class="img1"
+                    width="100%"
+                  />
+                  <p>
+                    <span class="heading text-bold text-medium"
+                      >Abdul Rehman, Rawalpindi</span
+                    >
+                    I was worried about selling my house and thinking how to
+                    sell it. Then I found out how easy it is to list my house
+                    for sale on OLX. I put my ad on OLX and started receiving
+                    calls from different buyers immediately. OLX helped me sell
+                    my house in just a few days...
+                  </p>
+                </div>
+                <div class="col-md-3 col-sm-5 thumbnail-jumbo">
+                  <img
+                    src="Assets/Images/story_img2.png"
+                    alt="story 2"
+                    class="img2"
+                    width="100%"
+                  />
+                  <p>
+                    <span class="heading text-bold text-medium"
+                      >Zain, Karachi</span
+                    >
+                    I sold my car today after listing it 2 days ago. I loved the
+                    responses on my ad and found OLX really amazing right from
+                    the minute I placed the ad. I recommend everyone to use OLX
+                    for buying and selling their products. You get the best
+                    value for your ad here. As they say "OLX bech de."
+                  </p>
+                </div>
+                <div class="col-md-3 col-sm-5 thumbnail-jumbo">
+                  <img
+                    src="Assets/Images/story_img3.png"
+                    alt="story 3"
+                    class="img3"
+                    width="100%"
+                  />
+                  <p>
+                    <span class="heading text-bold text-medium"
+                      >Yasir, Lahore</span
+                    >
+                    OLX is a great classified app. I sold my mobile within 2
+                    hours after posting my ad... I recommend OLX for selling and
+                    purchasing any thing (e.g. mobile, electronics, house items,
+                    cars or property)
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- grid section -->
+        <section>
+          <!-- gallery container -->
+          <div
+            class="grid-container grid-gallery container"
+            id="gridView"
+            style="display: none"
+          ></div>
+          <!-- end of gallerycontainer -->
+        </section>
+      </div>
+      <!-- end of main content -->
+    </main>
+    <!-- End of main -->
+
+    <!-- spiner -->
+    <div class="model" id="spinerDialog">
+      <div class="spinmode-content"><div class="spiner"></div></div>
+    </div>
+    <!-- end of spiner -->
+
+    <!-- Footer -->
+    <footer class="border-top-grey2px">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 logo"></div>
+          <div class="col-md-2">
+            <ul>
+              <li><a href="#">Location Map</a></li>
+              <li><a href="#">Popular Search</a></li>
+              <li><a href="#">Archive</a></li>
+              <li><a href="#">Sitemap</a></li>
+            </ul>
+          </div>
+          <div class="col-md-2">
+            <ul>
+              <li><a href="#">Term of user</a></li>
+              <li><a href="#">Help & Contact</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <ul>
+              <li><a href="#">Join Olx</a></li>
+              <li><a href="#">Happy Olxers</a></li>
+            </ul>
+          </div>
+          <div class="col-md-2">
+            <ul>
+              <li class="text-bold text-medium">Contact Us</li>
+              <li><i></i><a href="#">help@olx.com.pk</a></li>
+              <li><i></i>080010101</li>
+              <li>
+                <i></i>Business Packages <br />
+                <a href="#">Click here</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script>
+      // Iniialize Firebase
+      var config = {
+        apiKey: "AIzaSyClrMisTvQ2-J2lOL8TXIg6PfFRe7q88Jg",
+        authDomain: "olx-pk-6b561.firebaseapp.com",
+        databaseURL: "https://olx-pk-6b561.firebaseio.com",
+        projectId: "olx-pk-6b561",
+        storageBucket: "",
+        messagingSenderId: "251615634628"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script>
+      const messaging = firebase.messaging();
+      messaging.usePublicVapidKey(
+        "BA9gdlxFcGs_AA7yFMwEOJQ26hutJqKxq-qmxbCIf9d0LypVzGWe3k1D5lwYmX2kZ2C0ahy0wfgcJQJZyPDEXhg"
+      );
+      messaging
+        .requestPermission()
+        .then(function(e) {
+          console.log("requestPermission==>", e);
+          return messaging.getToken();
+        })
+        .then(currentToken => {
+          if (currentToken) {
+            console.log("Device token", currentToken);
+          }
+        })
+        .catch(function(err) {
+          console.log("Unable to get permission to notify.", err);
+        });
+    </script>
+    <script>
+      const favouriteKey = localStorage.getItem("userFavouriteKey")
+        ? JSON.parse(localStorage.getItem("userFavouriteKey"))
+        : [];
+      localStorage.setItem("userFavouriteKey", JSON.stringify(favouriteKey));
+    </script>
+    <script src="js/fontawesome.js"></script>
+    <script src="app.js"></script>
+    <script src="js/iziToast.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="js/jaaulde-cookies.js"></script>
+    <script src="js/tether.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/Authentication.js"></script>
+    <script src="js/model.js"></script>
+    <script src="pushMsg.js"></script>
+    <script src="js/Favourites.js"></script>
+    <script src="js/filterAds.js"></script>
+  </body>
+</html>

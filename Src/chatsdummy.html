@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chats</title>
+    <style>
+        .chatRoom-container{
+            width: 40%;
+            height: 400px;
+            margin: auto;
+            padding: 0;
+        }
+        .chatRoom-content{
+            background-color: rgba(7, 98, 139, 0.651);
+            width: 100%;
+            height: 340px;
+            overflow: scroll;
+            padding: 10px;
+        }
+        .message-item{
+            display: flex;
+            position: relative;
+        }
+        .message-item.L{
+            justify-content: flex-start;
+        }
+        .message-item.R{
+            justify-content: flex-end;
+        }
+        .fixed-textbox {
+            height: 60px;
+        }
+        .talk-bubble {
+            margin-top: 30px;
+            margin-bottom: 30px;
+            margin-left: 75px;
+            display: inline-block;
+            position: relative;
+            max-width: 250px;
+            min-width: 180px;
+            height: auto;
+            background-color: lightyellow;
+            border-radius: 20px;
+            -webkit-border-radius: 30px;
+        }
+        .tri-right.right-in:after {
+           content: ' ';
+            position: absolute;
+            width: 0;
+            height: 0;
+            top: 15px;
+            bottom: auto;
+            left: -12px;
+            right: auto;
+            border: 12px solid;
+            border-color: lightyellow lightyellow transparent transparent;
+        }
+        .talktext {
+            padding: 0.5em 1em 0.5em 1em;
+            text-align: left;
+            line-height: 1.5em;
+        }
+        .chat-img{
+            position: absolute;
+            height: 50px;
+            width: 50px;
+            left: 5px;
+            margin-right: 15px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        .chat-img img{
+            height: 100%;
+            width: 100%;
+            border-radius: 50%;   
+        }
+        .message-time{
+            position: absolute;
+            bottom: 5px;
+            right: -5%;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="chatRoom-container" id="chatRoom">
+    <div class="chatRoom-content" id="Chatcontent">
+        <div class="message-item L">
+            <a href="#" class="chat-img">
+                <img src="../Assets/Images/Unknown.png" alt="aaa">
+            </a>
+            <div class="talk-bubble tri-right round right-in">
+                <div class="talktext">
+                    Moving our way back up the right side
+                </div>
+                <span class="message-time text-dark-grey text-small right-0"><i>15:00 PM</i></span>
+            </div>
+        </div>
+        <div class="message-item R">
+            <div class="talk-bubble tri-right round right-in">
+                <div class="talktext">
+                    Moving our way back up the right side indented. Uses .round and .right-in
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="fixed-textbox">
+    <span><input type="text" name="" id="inputValue"> <button onclick='changeIt("Chatcontent")'>Click it</button></span>
+</div>
+</div>
+</body>
+</html>

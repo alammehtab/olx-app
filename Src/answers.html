@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>My Account</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+      integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/commonStyle.css" />
+    <link rel="stylesheet" href="css/iziToast.min.css">
+    <link rel="stylesheet" href="css/model.css" />
+    <link rel="stylesheet" href="css/answers.css" />
+  </head>
+
+  <body>
+    <!-- Firebase App is always required and must be first -->
+    <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-app.js"></script>
+
+    <!-- Add additional services that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-functions.js"></script>
+
+    <!-- header -->
+    <section class="container header">
+      <nav class="navbar navbar-expand-md navbar-dark">
+        <a class="logo" href="./index.html"
+          ><img src="Assets/Images/Olx logo.svg" alt="logo"
+        /></a>
+        <span class="text-bold heading heading-large text-large"
+          >Pakistan's Largest Marketplace</span
+        >
+        <span
+          class="text-bold heading heading-small text-large"
+          style="display:none"
+          >OLX PK</span
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#downDownMyAccount"
+          aria-controls="#downDownMyAccount"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          style="z-index:1;"
+        >
+          <span class="fas fa-bars text-large text-orange"></span>
+        </button>
+        <div class="drop-down">
+          <a href="answers.html" class="btn btn-account" id="myAccount">
+            <i class="fas fa-user "></i> My Account</a
+          >
+
+          <!-- drop down my account -->
+          <div class="collapse" id="downDownMyAccount">
+            <ul class="nav navbar-nav mr-auto">
+              <li class="hover-back-orange">
+                <a href="answers.html" class="text-bold text-blue">
+                  My Account</a
+                >
+              </li>
+              <li class="hover-back-orange">
+                <a href="postingAds.html" class="text-bold text-blue"
+                  >Submit an Ad</a
+                >
+              </li>
+              <li class="back-light-gray btn-logout">
+                <a
+                  href="#"
+                  class="text-bold text-dark-grey"
+                  onclick="Logout()"
+                  id="btnLogout"
+                  >Logout</a
+                >
+              </li>
+            </ul>
+          </div>
+          <!-- end of drop down -->
+        </div>
+        <a href="postingAds.html" class="btn btn-submit-ad">Submit an Ad</a>
+      </nav>
+    </section>
+    <!-- end of header -->
+
+    <!-- main content -->
+
+    <!-- start of accordion -->
+    <div class="accordion-container">
+      <div class="accordion" id="accordionExample">
+        <!-- start of chats card -->
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <button
+                class="btn btn-link"
+                type="button"
+                data-toggle="collapse"
+                data-target="#collapseOne"
+                aria-expanded="true"
+                aria-controls="collapseOne"
+              >
+                Chats
+              </button>
+            </h5>
+          </div>
+
+          <div
+            id="collapseOne"
+            class="collapse show"
+            aria-labelledby="headingOne"
+            data-parent="#accordionExample"
+          >
+            <div class="card-body">
+              <ul class="chats-list" id="chatsMetaList">
+                <!-- <li class="chat-item">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-2 col-sm-2 img-container">
+                                            <img src="../Assets/Images/empty_img.jpg" alt="chat-img" class="chat-img">
+                                            <img src="../Assets/Images/Olx logo.svg" alt="user-img" class="user-img">
+                                        </div>
+                                        <div class="col-md-10 col-sm-10 content-container">
+                                            <h6 class="user-name text-bold" id="userName">Adnan Hussain</h6>
+                                            <p class="chat-title text-bold text-small text-dark-grey">Want to sell this</p>
+                                            <p class="last-message text-dark-grey text-small" id="lastMessage"><i>many years ago i have to buy this</i></p>
+                                            <span class="chat-time text-small text-dark-grey"><i>9:00 Am</i></span>
+                                            <input type="hidden" id="uEmail_d" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li> -->
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- end of chats card -->
+
+        <!-- start of ads card -->
+        <div class="card">
+          <div class="card-header" id="headingTwo">
+            <h5 class="mb-0">
+              <button
+                class="btn btn-link collapsed"
+                type="button"
+                data-toggle="collapse"
+                onclick="showFavAdsClicked()"
+                data-target="#collapseTwo"
+                aria-expanded="false"
+                aria-controls="collapseTwo"
+              >
+                Ads
+              </button>
+            </h5>
+          </div>
+          <div
+            id="collapseTwo"
+            class="collapse"
+            aria-labelledby="headingTwo"
+            data-parent="#accordionExample"
+          >
+            <div class="card-body favads-list">
+              <div
+                class="grid-container grid-list"
+                id="gridView"
+                style="display: grid"
+              ></div>
+            </div>
+          </div>
+        </div>
+        <!-- end of ads card -->
+
+        <!-- start of settings card -->
+        <div class="card">
+          <div class="card-header" id="headingThree">
+            <h5 class="mb-0">
+              <button
+                class="btn btn-link collapsed"
+                type="button"
+                data-toggle="collapse"
+                data-target="#collapseThree"
+                aria-expanded="false"
+                aria-controls="collapseThree"
+              >
+                Settings
+              </button>
+            </h5>
+          </div>
+          <div
+            id="collapseThree"
+            class="collapse"
+            aria-labelledby="headingThree"
+            data-parent="#accordionExample"
+          >
+            <div class="card-body"></div>
+          </div>
+        </div>
+        <!-- end of settings card -->
+      </div>
+    </div>
+    <!-- end of accordion -->
+
+    <!-- start of chat room -->
+    <div class="model chatroom-dialog" id="modelDialog">
+      <div class="model-content chatroom-container" id="chatRomContainer">
+        <div class="model-header" id="chatHeader">
+          <div class="sender-info text-center">
+            <span
+              class="heading text-medium text-green text-large text-white"
+            ></span>
+            <span
+              class="model-close text-large text-white hover-text-alert btn-closechat"
+              ><i class="fas fa-arrow-left"></i
+            ></span>
+          </div>
+          <div class="chat-title text-center text-white text-bold"></div>
+        </div>
+
+        <div class="model-body" id="chatContent">
+          <!-- <div class="message-item L">
+                        <a href="#" class="chat-img">
+                            <img src="../Assets/Images/Unknown.png" alt="aaa">
+                        </a>
+                        <div class="talk-bubble tri-right round right-in">
+                            <div class="talktext">
+                                Moving our way back up the right side
+                            </div>
+                            <span class="message-time text-dark-grey text-small right-0"><i>15:00 PM</i></span>
+                        </div>
+                    </div> -->
+        </div>
+        <div class="model-footer" id="chatInput">
+          <form class="form-controls" onsubmit="return false">
+            <div class="input-group">
+              <!-- <input type="text" class="form-control input-text" onkeydown="filterInputKey(event)" aria-label="Recipient's username" aria-describedby="basic-addon2"> -->
+              <input
+                type="text"
+                class="form-control input-text"
+                aria-label="Recipient's username"
+                aria-describedby="basic-addon2"
+              />
+              <div class="input-group-append">
+                <button
+                  class="btn btn-outline-secondary btn-chatsend"
+                  type="button"
+                >
+                  <i class="fas fa-chevron-circle-right"></i>
+                </button>
+              </div>
+            </div>
+            <!-- <div class="textbox-group">
+                            <input type="text" name="" id="" class="text-box"> 
+                            <a href="javascript:void(0)" class="btn-chatsend"><i class="fas fa-chevron-circle-right"></i></a>
+                        </div> -->
+          </form>
+        </div>
+      </div>
+      <!-- some hidden feilds -->
+      <input type="hidden" value="" id="hf_bgcolor" />
+      <input type="hidden" value="" id="hf_lastfid" />
+      <input type="hidden" value="" id="hf_lastdir" />
+      <!--/*******************/-->
+    </div>
+    <!-- end of chat room -->
+
+    <!-- end of main content -->
+
+    <!-- footer -->
+    <footer class="border-top-grey2px">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 logo"></div>
+          <div class="col-md-2">
+            <ul>
+              <li><a href="#">Location Map</a></li>
+              <li><a href="#">Popular Search</a></li>
+              <li><a href="#">Archive</a></li>
+              <li><a href="#">Sitemap</a></li>
+            </ul>
+          </div>
+          <div class="col-md-2">
+            <ul>
+              <li><a href="#">Term of user</a></li>
+              <li><a href="#">Help & Contact</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <ul>
+              <li><a href="#">Join Olx</a></li>
+              <li><a href="#">Happy Olxers</a></li>
+            </ul>
+          </div>
+          <div class="col-md-2">
+            <ul>
+              <li class="text-bold text-medium">Contact Us</li>
+              <li><i></i><a href="#">help@olx.com.pk</a></li>
+              <li><i></i>080010101</li>
+              <li>
+                <i></i>Business Packages <br />
+                <a href="#">Click here</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- end of footer -->
+
+    <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+    <script>
+      // Iniialize Firebase
+      var config = {
+        apiKey: "AIzaSyClrMisTvQ2-J2lOL8TXIg6PfFRe7q88Jg",
+        authDomain: "olx-pk-6b561.firebaseapp.com",
+        databaseURL: "https://olx-pk-6b561.firebaseio.com",
+        projectId: "olx-pk-6b561",
+        storageBucket: "",
+        messagingSenderId: "251615634628"
+      };
+      firebase.initializeApp(config);
+
+      const msg = firebase.messaging();
+      msg.onMessage(function(payload) {
+        console.log("Message received. ", payload);
+      });
+    </script>
+    <script src="js/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="js/tether.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/iziToast.min.js"></script>
+    <script src="js/jaaulde-cookies.js"></script>
+    <script src="js/authentication.js"></script>
+    <script src="js/model.js"></script>
+    <script src="js/chatRoom.js"></script>
+    <script src="js/chatsMeta.js"></script>
+    <!-- <script src="js/filterAds.js"></script> -->
+    <script src="js/Favourites.js"></script>
+    <script src="js/filterFavAds.js"></script>
+  </body>
+</html>
